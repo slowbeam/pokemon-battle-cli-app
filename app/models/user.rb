@@ -31,5 +31,8 @@ class User < ActiveRecord::Base
     puts "\nPlease choose one from the list!!"
   end
 
+  def self.clear_users
+    User.delete_all
+  end
 
 end

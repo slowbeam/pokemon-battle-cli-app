@@ -1,22 +1,15 @@
 require './config/environment'
 
-Pokemon.pokemon_url_array
-Pokemon.build_pokemon_hash
-Pokemon.fill_poke_database
+# Pokemon.pokemon_url_array
+# Pokemon.build_pokemon_hash
+# Pokemon.fill_poke_database
+
 # run rake db:seed
 
 Enemy.load_enemies
-
+# binding.pry
 puts "Welcome to Pokemon Battle!\n"
-binding.pry
-# img = Magick::Image::read(ARGV[0]).first
-# img.each_pixel do |pixel, col, row|
-#   c = [pixel.red, pixel.green, pixel.blue].map { |v| 256 * (v / 65535.0) }
-#   pixel.opacity == 65535 ? print("  ") : print("  ".bg c)
-#   puts if col >= img.columns - 1
-# end
-# require 'catpix'
-#
+
 Catpix::print_image "https://usercontent2.hubstatic.com/13805615_f520.jpg",
   :limit_x => 0.5,
   :limit_y => 0,
@@ -89,9 +82,13 @@ end
  # else
  #   puts "Bye"
  # end
+ # Pokemon.pokemon_url_array
+ # Pokemon.build_pokemon_hash
+ # Pokemon.all_pokemon.each do |pokemon|
+ #   pokemon[:hp] = Pokemon.all
 
  Enemy.clear_enemies
-
+ User.clear_users
 
 
 
