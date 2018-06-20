@@ -35,7 +35,13 @@ new_user.choose_pokemon(user_input)
 
 
 puts "\nDo you want to see your pokemon stats? [Y/N]"
-  if gets.chomp.downcase == "y"
+  stat_input = gets.chomp.downcase
+  until (stat_input == 'y' || stat_input == 'n')
+    puts "Please enter Y or N: "
+    stat_input = gets.chomp.downcase
+  end
+
+  if stat_input == 'y'
     puts "\nYour pokemon stats are...\n\n"
     new_user.view_stats
   end
@@ -45,8 +51,13 @@ puts "\nDo you want to see your pokemon stats? [Y/N]"
 enemy1 = Enemy.random_enemy
 enemy_pokemon = enemy1.random_pokemon
 puts "\nAre you ready to battle? [Y/N]"
-user_input = gets.chomp.downcase
-until user_input == 'y'
+battle_input = gets.chomp.downcase
+until (battle_input == 'y' || battle_input == 'n')
+  puts "Please enter Y or N: "
+  battle_input = gets.chomp.downcase
+end
+
+until battle_input == 'y'
   sleep(1)
   puts "\n."
   sleep(1)
