@@ -64,8 +64,8 @@ until battle_input == 'y'
   puts "\n."
   sleep(1)
   puts "\n."
-  puts "\nAre you ready now? [Y/N]"
-  user_input = gets.chomp.downcase
+  puts "\nAre you ready now? Please enter Y or N: "
+  battle_input = gets.chomp.downcase
 end
 
 
@@ -74,12 +74,36 @@ end
  # if gets.chomp.downcase == 'y'
    puts "\nYou are battling #{enemy1.name}."
    puts "\nDo you want to see #{enemy1.name}'s pokemon stats? [Y/N]"
-   if gets.chomp.downcase == 'y'
+   e_stat_input = gets.chomp.downcase
+   until (e_stat_input == 'y' || e_stat_input == 'n')
+     puts "Please enter Y or N: "
+     e_stat_input = gets.chomp.downcase
+   end
+
+   if e_stat_input == 'y'
      puts "\n#{enemy1.name}'s pokemon stats are... \n\n"
      enemy1.view_stats
    end
+
    puts "\nStart Battle? [Y/N]\n"
-    if gets.chomp.downcase == 'y'
+   start_input = gets.chomp.downcase
+   until (start_input == 'y' || start_input == 'n')
+     puts "Please enter Y or N: "
+     start_input = gets.chomp.downcase
+   end
+
+   until (start_input == 'y')
+     sleep(1)
+     puts "\n."
+     sleep(1)
+     puts "\n."
+     sleep(1)
+     puts "\n."
+     puts "\nStart battle now? Please enter Y or N: "
+     start_input = gets.chomp.downcase
+   end
+
+    if start_input == 'y'
       fight = Battle.create(user_id: new_user.id, enemy_id: enemy1.id)
       puts "Pow!"
       sleep(1)
