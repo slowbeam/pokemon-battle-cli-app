@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   ##Need to come back and look into the nil added to the end above
   def self.choose_name(user_input)
-    self.class.name = user_input
+    self.name = user_input
   end
 
   def choose_pokemon(user_input)
@@ -20,5 +20,16 @@ class User < ActiveRecord::Base
     puts "HP: #{my_pokemon[:hp]}"
     puts "ATTACK: #{my_pokemon[:attack]}"
   end
+
+  def self.select_pokemon
+    puts "\nHere are the pokemon you can choose from..\n\n"
+    Pokemon.populate_list
+    puts "\nChoose a pokemon: "
+  end
+
+  def self.wrong_pokemon
+    puts "\nPlease choose one from the list!!"
+  end
+
 
 end

@@ -42,6 +42,11 @@ class Pokemon < ActiveRecord::Base
     @@all_pokemon
   end
 
+  def self.get_names
+    Pokemon.all.map do |pokemon|
+      pokemon[:name]
+    end
+  end
 
   def self.fill_poke_database
     @@all_pokemon.each do |pokemon|

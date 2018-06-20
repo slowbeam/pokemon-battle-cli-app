@@ -22,6 +22,28 @@ class Enemy < ActiveRecord::Base
     puts "ATTACK: #{my_pokemon[:attack]}"
   end
 
+  def self.load_enemies
+    Enemy.create(name: "Jessie")
+    Enemy.create(name: "James")
+    Enemy.create(name: "Giovanni")
+    Enemy.create(name: "Archie")
+    Enemy.create(name: "Ash Catchem")
+    Enemy.create(name: "Brock")
+    Enemy.create(name: "Misty")
+    Enemy.create(name: "Professor Oak")
+    Enemy.create(name: "Donald Trump")
+  end
+
+  def self.clear_enemies
+    Enemy.delete_all
+  end
+
+  def self.random_enemy
+    r = Random.rand(1..Enemy.all.count)
+    found_enemy = Enemy.find(r)
+    found_enemy
+  end
+
   # def choose_pokemon(user_input)
   #   found_pokemon = Pokemon.find_by_name(user_input)
   #   self.pokemon_id = found_pokemon.id
