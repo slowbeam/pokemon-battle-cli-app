@@ -3,22 +3,18 @@ require './config/environment'
 # Pokemon.pokemon_url_array
 # Pokemon.build_pokemon_hash
 # Pokemon.fill_poke_database
+# sudo apt-get install sox libsox-fmt-mp3
 
 # run rake db:seed
 
 Enemy.load_enemies
-# binding.pry
+
 puts "Welcome to Pokemon Battle!\n"
+puts `say \"welcome to pokemon battle\"`
 
-Catpix::print_image "https://usercontent2.hubstatic.com/13805615_f520.jpg",
-  :limit_x => 0.5,
-  :limit_y => 0,
-  :center_x => true,
-  :center_y => false,
-  :bg => "white",
-  :bg_fill => false
+Battle.print_image("https://usercontent2.hubstatic.com/13805615_f520.jpg", 0.5)
 
-# sleep(2)
+puts `afplay 'Pokemon RedBlue Opening.mp3'`
 
 puts "Please enter your name:"
 name = gets.chomp
@@ -33,7 +29,6 @@ end
 
 new_user.choose_pokemon(user_input)
 
-
 puts "\nDo you want to see your pokemon stats? [Y/N]"
   stat_input = gets.chomp.downcase
   until (stat_input == 'y' || stat_input == 'n')
@@ -45,8 +40,6 @@ puts "\nDo you want to see your pokemon stats? [Y/N]"
     puts "\nYour pokemon stats are...\n\n"
     new_user.view_stats
   end
-
-#Enemy.create(name: "Computer")
 
 enemy1 = Enemy.random_enemy
 enemy_pokemon = enemy1.random_pokemon
@@ -68,10 +61,6 @@ until battle_input == 'y'
   battle_input = gets.chomp.downcase
 end
 
-
-
-
- # if gets.chomp.downcase == 'y'
    puts "\nYou are battling #{enemy1.name}."
    puts "\nDo you want to see #{enemy1.name}'s pokemon stats? [Y/N]"
    e_stat_input = gets.chomp.downcase
@@ -107,42 +96,12 @@ end
       fight = Battle.create(user_id: new_user.id, enemy_id: enemy1.id)
       puts "POW!"
       # sleep(1)
-      Catpix::print_image "http://moziru.com/images/explosions-clipart-war-16.jpg",
-        :limit_x => 0.8,
-        :limit_y => 0,
-        :center_x => true,
-        :center_y => false,
-        :bg => "white",
-        :bg_fill => false
+      Battle.print_image("http://moziru.com/images/explosions-clipart-war-16.jpg", 0.8)
       # sleep(1)
       puts "ZAP!"
-      Catpix::print_image "https://www.allfree-clipart.com/Weather/lightning.jpg",
-        :limit_x => 0.5,
-        :limit_y => 0.0,
-        :center_x => true,
-        :center_y => false,
-        :bg => "white",
-        :bg_fill => false
+      Battle.print_image("https://www.allfree-clipart.com/Weather/lightning.jpg", 0.5)
       fight.new_battle
-      # fight.whos_the_winner
-      # binding.pry
     end
- # else
- #   puts "Bye"
- # end
- # Pokemon.pokemon_url_array
- # Pokemon.build_pokemon_hash
- # Pokemon.all_pokemon.each do |pokemon|
- #   pokemon[:hp] = Pokemon.all
 
  Enemy.clear_enemies
  User.clear_users
-
-
-
-
-
-
-
-
-# binding.pry
