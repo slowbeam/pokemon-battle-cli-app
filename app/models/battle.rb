@@ -33,28 +33,7 @@ class Battle < ActiveRecord::Base
     while @u_hp > 0 || @e_hp > 0
       self.fight_with_attack_div_3
 
-      puts "Attack Number #{x + 1}!"
-
-      if @u_hp > 0 && @e_hp > 0
-      puts "Your pokemon's HP: #{@u_hp}"
-      puts "Your enemy's pokemon's HP: #{@e_hp}"
-
-      elsif @u_hp <= 0
-        @u_hp = 0
-        puts "Your pokemon's HP: #{@u_hp}"
-        puts "Your enemy's pokemon's HP: #{@e_hp}"
-        puts "#{self.enemy_name} is the winner!"
-
-        break
-      elsif @e_hp <= 0
-        @e_hp = 0
-        puts "Your pokemon's HP: #{@u_hp}"
-        puts "Your enemy's pokemon's HP: #{@e_hp}"
-        puts "You are the winner!"
-        break
-      end
-      x += 1
-      sleep(2)
+      puts "\nAttack Number #{x + 1}!"
       Catpix::print_image "#{self.random_img_url}",
         :limit_x => 0.8,
         :limit_y => 0,
@@ -62,6 +41,29 @@ class Battle < ActiveRecord::Base
         :center_y => false,
         :bg => "white",
         :bg_fill => false
+
+      if @u_hp > 0 && @e_hp > 0
+      puts "Your pokemon's HP: #{@u_hp}"
+      puts "Your enemy's pokemon's HP: #{@e_hp}"
+      sleep(2)
+
+      elsif @u_hp <= 0
+        @u_hp = 0
+        puts "Your pokemon's HP: #{@u_hp}"
+        puts "Your enemy's pokemon's HP: #{@e_hp}"
+        puts "\n#{self.enemy_name} is the winner!"
+
+        break
+      elsif @e_hp <= 0
+        @e_hp = 0
+        puts "Your pokemon's HP: #{@u_hp}"
+        puts "Your enemy's pokemon's HP: #{@e_hp}"
+        puts "\nYou are the winner!"
+        break
+      end
+      x += 1
+      # sleep(2)
+
     end
   end
 
