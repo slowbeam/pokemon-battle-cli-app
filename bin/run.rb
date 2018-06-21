@@ -14,7 +14,7 @@ Catpix::print_image "https://usercontent2.hubstatic.com/13805615_f520.jpg",
   :limit_x => 0.5,
   :limit_y => 0,
   :center_x => true,
-  :center_y => true,
+  :center_y => false,
   :bg => "white",
   :bg_fill => false
 
@@ -105,13 +105,30 @@ end
 
     if start_input == 'y'
       fight = Battle.create(user_id: new_user.id, enemy_id: enemy1.id)
-      puts "Pow!"
-      sleep(1)
-      puts "Scratch!"
-      sleep(1)
+      puts "POW!"
+      # sleep(1)
+      Catpix::print_image "http://moziru.com/images/explosions-clipart-war-16.jpg",
+        :limit_x => 0.8,
+        :limit_y => 0,
+        :center_x => true,
+        :center_y => false,
+        :bg => "white",
+        :bg_fill => false
+      # sleep(1)
+      puts "ZAP!"
+      Catpix::print_image "https://www.allfree-clipart.com/Weather/lightning.jpg",
+        :limit_x => 0.5,
+        :limit_y => 0.0,
+        :center_x => true,
+        :center_y => false,
+        :bg => "white",
+        :bg_fill => false
+      # sleep(1)
       puts "Ouch!"
       sleep(1)
       fight.whos_the_winner
+      puts fight.user_pokemon_hp
+      puts fight.enemy_pokemon_hp
       # binding.pry
     end
  # else
