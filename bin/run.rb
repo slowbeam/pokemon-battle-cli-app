@@ -123,12 +123,7 @@ end
         :center_y => false,
         :bg => "white",
         :bg_fill => false
-      # sleep(1)
-      puts "Ouch!"
-      sleep(1)
       fight.whos_the_winner
-      puts fight.user_pokemon_hp
-      puts fight.enemy_pokemon_hp
       # binding.pry
     end
  # else

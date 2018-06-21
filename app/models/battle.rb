@@ -25,8 +25,41 @@ class Battle < ActiveRecord::Base
     @e_hp = found_enemy_pokemon[:hp]
   end
 
+  def new_battle
+    x=0
+    enemy_pokemon_hp
+    user_pokemon_hp
+    get_user_attack
+    get_enemy_attack
+    until @u_hp <= 0 || @e_hp <=0
+      self.fight_with_attack_div_3
+      puts "Attack Number #{x + 1}!"
+      puts "Your pokemon's HP: #{@u_hp}"
+      puts "Your enemy's pokemon's HP: #{@e_hp}"
+      x += 1
+      sleep(2)
+      Catpix::print_image "#{self.random_img_url}",
+        :limit_x => 0.8,
+        :limit_y => 0,
+        :center_x => true,
+        :center_y => false,
+        :bg => "white",
+        :bg_fill => false
+    end
+  end
+
+  def random_img_url
+    img_arr = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqtGPBlGkuGyekTVuMRKEYOlhxr1hyuHs0XR3q18j8jHgUNKdP", "http://clipground.com/images/sparks-clipart-7.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRljXdnk4h4pKTZLUSfxHgL8KirYiumUxGA8rVI3l8-FwHO7wQK"]
+    img_arr.sample
+  end
+
+  def fight_with_attack_div_3
+    @e_hp -=  (@u_attack / 3)
+    @u_hp -= (@e_attack / 3)
+  end
+
   def whos_the_winner
-    self.fight_with_attack
+    self.new_battle
     if @u_hp > @e_hp
       puts "You are the winner!"
     elsif @e_hp > @u_hp
