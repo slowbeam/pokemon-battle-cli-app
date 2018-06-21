@@ -123,7 +123,8 @@ end
         :center_y => false,
         :bg => "white",
         :bg_fill => false
-      fight.whos_the_winner
+      fight.new_battle
+      # fight.whos_the_winner
       # binding.pry
     end
  # else

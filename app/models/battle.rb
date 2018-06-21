@@ -24,18 +24,35 @@ class Battle < ActiveRecord::Base
     end
     @e_hp = found_enemy_pokemon[:hp]
   end
-
   def new_battle
     x=0
     enemy_pokemon_hp
     user_pokemon_hp
     get_user_attack
     get_enemy_attack
-    until @u_hp <= 0 || @e_hp <=0
+    while @u_hp > 0 || @e_hp > 0
       self.fight_with_attack_div_3
+
       puts "Attack Number #{x + 1}!"
+
+      if @u_hp > 0 && @e_hp > 0
       puts "Your pokemon's HP: #{@u_hp}"
       puts "Your enemy's pokemon's HP: #{@e_hp}"
+
+      elsif @u_hp <= 0
+        @u_hp = 0
+        puts "Your pokemon's HP: #{@u_hp}"
+        puts "Your enemy's pokemon's HP: #{@e_hp}"
+        puts "#{self.enemy_name} is the winner!"
+
+        break
+      elsif @e_hp <= 0
+        @e_hp = 0
+        puts "Your pokemon's HP: #{@u_hp}"
+        puts "Your enemy's pokemon's HP: #{@e_hp}"
+        puts "You are the winner!"
+        break
+      end
       x += 1
       sleep(2)
       Catpix::print_image "#{self.random_img_url}",
@@ -48,6 +65,36 @@ class Battle < ActiveRecord::Base
     end
   end
 
+  # def new_battle
+  #   x=0
+  #   enemy_pokemon_hp
+  #   user_pokemon_hp
+  #   get_user_attack
+  #   get_enemy_attack
+  #   until @u_hp == 0 || @e_hp ==0
+  #     self.fight_with_attack_div_3
+  #     puts "Attack Number #{x + 1}!"
+  #     if @u_hp < 0
+  #       @u_hp = 0
+  #       puts "#{self.enemy_name} is the winner!"
+  #     elsif @e_hp < 0
+  #       @e_hp = 0
+  #       puts "You are the winner!"
+  #     end
+  #     puts "Your pokemon's HP: #{@u_hp}"
+  #     puts "Your enemy's pokemon's HP: #{@e_hp}"
+  #     x += 1
+  #     sleep(2)
+  #     Catpix::print_image "#{self.random_img_url}",
+  #       :limit_x => 0.8,
+  #       :limit_y => 0,
+  #       :center_x => true,
+  #       :center_y => false,
+  #       :bg => "white",
+  #       :bg_fill => false
+  #   end
+  # end
+
   def random_img_url
     img_arr = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqtGPBlGkuGyekTVuMRKEYOlhxr1hyuHs0XR3q18j8jHgUNKdP", "http://clipground.com/images/sparks-clipart-7.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRljXdnk4h4pKTZLUSfxHgL8KirYiumUxGA8rVI3l8-FwHO7wQK"]
     img_arr.sample
@@ -58,16 +105,21 @@ class Battle < ActiveRecord::Base
     @u_hp -= (@e_attack / 3)
   end
 
-  def whos_the_winner
-    self.new_battle
-    if @u_hp > @e_hp
-      puts "You are the winner!"
-    elsif @e_hp > @u_hp
-      puts "#{self.enemy_name} is the winner!"
-    elsif @u_hp == @e_hp
-      puts "It was a tie!"
-    end
-  end
+  # def first_to_zero
+  #   if @u_hp  == 0
+  #     puts "#{self.enemy_name} is the winner!"
+  #   end
+  # end
+  # def whos_the_winner
+  #   self.new_battle
+  #   if @u_hp > @e_hp
+  #     puts "You are the winner!"
+  #   elsif @e_hp > @u_hp
+  #     puts "#{self.enemy_name} is the winner!"
+  #   elsif @u_hp == @e_hp
+  #     puts "It was a tie!"
+  #   end
+  # end
 
   def enemy_name
     found_enemy = Enemy.all.find do |enemy|
