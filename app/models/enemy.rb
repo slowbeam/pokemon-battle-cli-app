@@ -1,4 +1,5 @@
 class Enemy < ActiveRecord::Base
+  # Generates random pokemon id and assigns it to the enemy instance.
 
   def random_pokemon
     r = Random.rand(1..20)
@@ -6,7 +7,7 @@ class Enemy < ActiveRecord::Base
     self.pokemon_id = found_pokemon.id
     self.save
   end
-
+# Finds the pokemon by id that matches enemy's pokemon_id and returns his or her pokemon's stats (name, hp, attack)
   def view_stats
     my_pokemon = Pokemon.all.find do |pokemon|
       pokemon.id == self.pokemon_id
@@ -15,6 +16,7 @@ class Enemy < ActiveRecord::Base
     puts "HP: #{my_pokemon[:hp]}"
     puts "ATTACK: #{my_pokemon[:attack]}"
   end
+  # This creates multiple enemy instances and saves it to the database
 
   def self.load_enemies
     Enemy.create(name: "Jessie")
@@ -27,11 +29,13 @@ class Enemy < ActiveRecord::Base
     Enemy.create(name: "Professor Oak")
     Enemy.create(name: "Donald Trump")
   end
+  # After the game ends, this method will clear the list of enemy instances
 
   def self.clear_enemies
     Enemy.delete_all
   end
 
+    # Generates a random enemy instance from the list of 9 enemy instances
   def self.random_enemy
     r = Random.rand(1..Enemy.all.count)
     found_enemy = Enemy.find(r)
