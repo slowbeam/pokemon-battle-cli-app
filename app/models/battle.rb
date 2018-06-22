@@ -4,8 +4,9 @@ class Battle < ActiveRecord::Base
   @u_attack
   @e_attack
 
-  # def enemy_user_hp_message
-  # end
+def hi
+  puts "hi"
+end 
 
   def new_battle
     x=0
@@ -73,22 +74,6 @@ class Battle < ActiveRecord::Base
   def subtract_enemy_hp
     @e_hp -=  (@u_attack / 3)
   end
-
-  # def first_to_zero
-  #   if @u_hp  == 0
-  #     puts "#{self.enemy_name} is the winner!"
-  #   end
-  # end
-  # def whos_the_winner
-  #   self.new_battle
-  #   if @u_hp > @e_hp
-  #     puts "You are the winner!"
-  #   elsif @e_hp > @u_hp
-  #     puts "#{self.enemy_name} is the winner!"
-  #   elsif @u_hp == @e_hp
-  #     puts "It was a tie!"
-  #   end
-  # end
 
   def enemy_name
     found_enemy = Enemy.all.find do |enemy|

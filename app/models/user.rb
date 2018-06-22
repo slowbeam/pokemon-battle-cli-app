@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-
-  ##Need to come back and look into the nil added to the end above
   def self.choose_name(user_input)
     self.name = user_input
   end

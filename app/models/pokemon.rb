@@ -10,7 +10,6 @@ class Pokemon < ActiveRecord::Base
       all_pokemon = RestClient.get(pokemon_url)
       pokemon_hash = JSON.parse(all_pokemon)
       pokemon_hash["results"].each do |pokemon|
-      # binding.pry
       @poke_url_array << pokemon["url"]
       end
       @poke_url_array
@@ -29,13 +28,9 @@ class Pokemon < ActiveRecord::Base
         if x["stat"]["name"] == "attack"
           pokemon_hash[:attack] = x["base_stat"]
         end
-        # binding.pry
-      # pokemon_hash[:hp] = indiv_poke_hash["stats"][stat]
-      # binding.pry
       end
       @@all_pokemon << pokemon_hash
     end
-    # @@all_pokemon
   end
 
   def self.all_pokemon
@@ -51,7 +46,6 @@ class Pokemon < ActiveRecord::Base
   def self.fill_poke_database
     @@all_pokemon.each do |pokemon|
       Pokemon.create(name: pokemon[:name], attack: pokemon[:attack], hp: pokemon[:hp])
-      # binding.pry
     end
   end
 
@@ -69,8 +63,4 @@ class Pokemon < ActiveRecord::Base
     end
     puts list
   end
-
-
-
-
 end

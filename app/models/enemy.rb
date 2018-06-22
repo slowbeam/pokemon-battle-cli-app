@@ -1,11 +1,5 @@
 class Enemy < ActiveRecord::Base
-  # def self.populate_list
-  #   list = Pokemon.all.map do |pokemon|
-  #     pokemon[:name]
-  #   end
-  #   puts list
-  # end
-  ##Need to come back and look into the nil added to the end above
+
   def random_pokemon
     r = Random.rand(1..20)
     found_pokemon = Pokemon.find(r)
